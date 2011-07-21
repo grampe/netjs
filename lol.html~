@@ -1,30 +1,44 @@
 <html>
 <script type="text/javascript" src="raphael.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
-
+<title>Nodes</title>
 <body>
 <script>
-var r=10;
-var paper = Raphael(0, 0, 600, 800);
-
+var paper = Raphael(0, 0, 1280, 800);
+var nodes = Array();
+function path(f,t)
+{
+	return paper.path("M"+String(nodes[f].attrs.cx)+" "+String(nodes[f].attrs.cy)+"L"+String(nodes[t].attrs.cx)+" "+String(nodes[t].attrs.cy));
+}
 $(document).ready(function() {    
 	$.getJSON(
 		"net.json",
 		function(data){
-			r = data.radius;
-			cir= paper.circle(r, r, r;)			
-		}
+			var r = Array()
+			document.title=data.radius[0];
+			r=data.radius;
+			//var paper = Raphael(0, 0, 1280, 800);
+			for(i=0;i<3;i++)
+			{
+				nodes[i] = paper.circle(data.x[i],data.y[i],r[i]);
+				nodes[i].attr("fill", data.color[i]);
+				nodes[i].attr("stroke", "#fff");
+				nodes[i].toFront();
+			}
+				for(i=0;i<3;i=i+2)
+			{
+				path(data.path[i],data.path[i+1])			
+			}
+			//for(i=0;i<3;i++)
+			//{
+				//nodes[i] = paper.circle(data.x[i],data.y[i],r[i]);
+				//nodes[i].attr("fill", data.color[i]);
+				//nodes[i].attr("stroke", "#fff");
+				//nodes[i].show();	
+			//}
+		}	
 	);
 });
-document.write(r);
-
-var a = Array();
-for(i=0;i<10;i++)
-{
-	a[i] = paper.circle(r + i*r*2, r+ i*r*2, r);
-	a[i].attr("fill", "#f00");
-	a[i].attr("stroke", "#fff");	
-}
 </script>
 </body>
 </html>
