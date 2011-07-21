@@ -15,7 +15,7 @@ $(document).ready(function() {
 	$.getJSON(
 		"net.json",
 		function(data){
-			n=data.var;
+			n=data.num;
 			for(i=0;i<n;i++) {
 				nodes[i] = paper.circle(data.nodes[i].x,data.nodes[i].y,data.nodes[i].radius);
 				nodes[i].attr("fill", data.nodes[i].color);
