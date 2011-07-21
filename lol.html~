@@ -12,7 +12,7 @@ $(document).ready(function() {
 		"net.json",
 		function(data){
 			r = data.radius;
-			cir= paper.circle(r, r, r);			
+			cir= paper.circle(r, r, r;)			
 		}
 	);
 });
