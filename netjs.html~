@@ -6,7 +6,8 @@
 <script>
 var paper = Raphael(0, 0, 1280, 800);
 var nodes = Array();
-function path(f,t)
+var paths = Array();
+function drawpath(f,t)
 {
 	return paper.path("M"+String(nodes[f].attrs.cx)+" "+String(nodes[f].attrs.cy)+"L"+String(nodes[t].attrs.cx)+" "+String(nodes[t].attrs.cy));
 }
@@ -14,21 +15,18 @@ $(document).ready(function() {
 	$.getJSON(
 		"net.json",
 		function(data){
-			var r = Array()
-			document.title=data.radius[0];
-			r=data.radius;
-			for(i=0;i<3;i++)
-			{
-				nodes[i] = paper.circle(data.x[i],data.y[i],r[i]);
-				nodes[i].attr("fill", data.color[i]);
+			n=data.var;
+			for(i=0;i<3;i++) {
+				nodes[i] = paper.circle(data.nodes[i].x,data.nodes[i].y,data.nodes[i].radius);
+				nodes[i].attr("fill", data.nodes[i].color);
 				nodes[i].attr("stroke", "#fff");
 			}
-				for(i=0;i<3;i=i+2)
-			{
-				path(data.path[i],data.path[i+1])			
+			for(i=0;i<3;i++) {
+				for(j=0;j<1;j++) {
+					paths[j] = drawpath(i,data.nodes[i].path[j]);
+				}				
 			}
-			for(i=0;i<3;i++)
-			{
+			for(i=0;i<3;i++) {
 				nodes[i].toFront();
 			}
 		}	
