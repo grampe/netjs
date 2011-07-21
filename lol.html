@@ -1,0 +1,30 @@
+<html>
+<script type="text/javascript" src="raphael.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+
+<body>
+<script>
+var r=10;
+$(document).ready(function() {    
+	$.getJSON(
+		"net.json",
+		function(data){
+			r = data.radius;
+			document.write(r);
+		}
+	);
+});
+document.write(r);
+var paper = Raphael(0, 0, 600, 800);
+var a = Array();
+for(i=0;i<10;i++)
+{
+	a[i] = paper.circle(r + i*r*2, r+ i*r*2, r);
+	a[i].attr("fill", "#f00");
+	a[i].attr("stroke", "#fff");	
+}
+
+</script>
+</body>
+</html>
+
